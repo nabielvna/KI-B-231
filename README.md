@@ -12,28 +12,33 @@ README ini berisikan penjelasan mengenai kode yang telah dibuat `socket_server.p
 
 
 ## DAFTAR ISI
-- [Anggota](#anggota)
-- [Soal](#soal)
-- [1. Server Socket](#1-server-socket)
-  - [1.1 Import](#11-import)
-  - [1.2 Deklarasi Key, Host, dan Port](#12-deklarasi-key-host-dan-port)
-  - [1.3 Inisialisasi Socket](#13-inisialisasi-socket)
-  - [1.4 Komunikasi & Alamat](#14-komunikasi--alamat)
-  - [1.5 Menerima Pesan](#15-menerima-pesan)
-  - [1.6 Dekripsi](#16-dekripsi)
-  - [1.7 Menerima Input User](#17-menerima-input-user)
-  - [1.8 Mengirim Pesan](#18-mengirim-pesan)
-  - [1.9 Menutup Koneksi](#19-menutup-koneksi)
-- [2. Client Socket](#2-client-socket)
-  - [2.1 Inisialisasi Socket](#21-inisialisasi-socket)
-  - [2.2 Menerima Input User](#22-menerima-input-user)
-  - [2.3 Mengirim Pesan](#23-mengirim-pesan)
-  - [2.4 Menerima Pesan](#24-menerima-pesan)
-  - [2.5 Dekripsi](#25-dekripsi)
-- [Penggunaan](#penggunaan)
-- [Sumber](#sumber)
-
-
+- [ANGGOTA](#anggota)
+- [DAFTAR ISI](#daftar-isi)
+- [SOAL](#soal)
+- [1. SERVER SOCKET](#1-server-socket)
+  - [1.1 IMPORT](#11-import)
+  - [1.2 DEKLARASI KEY, HOST, DAN PORT](#12-deklarasi-key-host-dan-port)
+  - [1.3 INISIALISASI SOCKET](#13-inisialisasi-socket)
+  - [1.4 KOMUNIKASI & ALAMAT](#14-komunikasi--alamat)
+  - [1.5 MENERIMA PESAN](#15-menerima-pesan)
+  - [1.6 DEKRIPSI](#16-dekripsi)
+  - [1.7 MENERIMA INPUT USER](#17-menerima-input-user)
+  - [1.8 MENGIRIM PESAN](#18-mengirim-pesan)
+  - [1.9 MENUTUP KONEKSI](#19-menutup-koneksi)
+- [2. CLIENT SOCKET](#2-client-socket)
+  - [2.1 INISIALISASI SOCKET](#21-inisialisasi-socket)
+  - [2.2 MENERIMA INPUT USER](#22-menerima-input-user)
+  - [2.3 MENGIRIM PESAN](#23-mengirim-pesan)
+  - [2.4 MENERIMA PESAN](#24-menerima-pesan)
+  - [2.5 DEKRIPSI](#25-dekripsi)
+- [3. PENGGUNAAN](#3-penggunaan)
+  - [3.1 BUKA DUA TERMINAL](#31-buka-dua-terminal)
+  - [3.2 JALANKAN FILE `socket_server.py` DI SALAH SATU TERMINAL](#32-jalankan-file-socket_serverpy-di-salah-satu-terminal)
+  - [3.3 JALANKAN FILE `socket_client.py` DI TERMINAL LAINNYA](#33-jalankan-file-socket_clientpy-di-terminal-lainnya)
+  - [3.4 KIRIM PESAN MELALUI CLIENT](#34-kirim-pesan-melalui-client)
+  - [3.5 KIRIM PESAN MELALUI SERVER](#35-kirim-pesan-melalui-server)
+- [4. SUMBER](#4-sumber)
+  - [4.1 Penggunaan socket dengan python [Digital Ocean]](#41-penggunaan-socket-dengan-python-digital-ocean)
 
 ## Soal
 Pengembangan program enkripsi dan dekripsi DES dari Tugas 1:
@@ -43,8 +48,9 @@ Pengembangan program enkripsi dan dekripsi DES dari Tugas 1:
 4. Untuk key dianggap kedua client tau (boleh hardcode)
 
 
-## 1. SERVER SOCKET
+## 1 SERVER SOCKET
 Penjelasan mengenai `socket_server.py`
+
 #### 1.1 IMPORT
 Pertama kita import `socket` untuk membuat koneksi serta `encrypt` dan `decrypt` dari `des_tugas1` sebagai algoritma enkripsi dan dekripsi DES dari tugas pertama 
 ```py
@@ -53,14 +59,14 @@ from des_tugas1 import encrypt, decrypt
 ```
 
 #### 1.2 DEKLARASI KEY, HOST, DAN PORT
-Kemudian kita deklarasikan `key` yang akan digunakan untuk enkripsi dan dekripsi, host, serta port yang akan digunakan untuk koneksi
+Kemudian kita deklarasikan `key` yang akan digunakan untuk enkripsi dan dekripsi, `host`, serta `port` yang akan digunakan untuk koneksi
 ```py
 SHARED_KEY = "password"
     
 host = '127.0.0.1'
 port = 5000
 ```
-Kita atur host -> `localhost` sehingga hanya bisa diakses di komputer yang sama dan port -> `5000` 
+Kita atur `host` -> `localhost` sehingga hanya bisa diakses di komputer yang sama dan `port` -> `5000` 
 
 #### 1.3 INISIALISASI SOCKET
 Inisialisasikan socket baru dengan nama `server_socket`
@@ -111,7 +117,7 @@ data = input('\n -> ')
     if data.lower().strip() == 'bye':
         break
 ```
-jika `user` memberikan input *bye* maka server akan berhenti menerima pesan
+jika `user` memberikan input _bye_ maka `server` akan berhenti menerima pesan
 
 #### 1.8 MENGIRIM PESAN
 Kita kembali menggunakan try & except block dimana `server` akan mencoba untuk mengenkripsi data yang diberikan oleh `user` dan mengirimnya ke `client`
@@ -126,12 +132,13 @@ except Exception as e:
 jika terjadi kesalahan maka akan dilempar ke exception block untuk menampilkan pesan error dan mengirimkan pesan error ke `client`
 
 #### 1.9 MENUTUP KONEKSI
-Ketika sudah selesai server akan menutup koneksi
+Ketika sudah selesai `server` akan menutup koneksi
 ```py
 conn.close()  # close the connection
 ```
 
-## 2. CLIENT SOCKET
+
+## 2 CLIENT SOCKET
 Penjelasan mengenai `socket_client.py`. `socket_client.py` memiliki import, deklarasi `key`, `host`, dan `port` yang sama dengan `socket_server.py` karena akan terhubung dengan `socket_server.py`
 
 #### 2.1 INISIALISASI SOCKET
@@ -180,22 +187,36 @@ except Exception as e:
 ```
 `decrypted_data` akan ditampilkan dan jika ada error akan di lempar ke exception block untuk menyampaikan pesan error
 
-## PENGGUNAAN
-#### 1. Buka 2 terminal
+#### 2.6 MENUTUP KONEKSI
+Ketika sudah selesai `client` akan menutup koneksi
+```py
+client_socket.close()  # close the connection
+```
 
-#### 2. Jalankan file `socket_server.py` di salah satu terminal
+
+## 3 PENGGUNAAN
+#### 3.1 BUKA DUA TERMINAL
+![buka-terminal](https://github.com/nabielvna/KI-B-231/blob/tugas2/Assets/buka-terminal.png?raw=true)
+#### 3.2 JALANKAN FILE `socket_server.py` DI SALAH SATU TERMINAL
+![jalankan-server](https://github.com/nabielvna/KI-B-231/blob/tugas2/Assets/jalankan-server.png?raw=true)
 **Windows**
 ```
 python socket_server.py
 ```
 kemudian tunggu hingga `client` dijalankan
 
-#### 3. Jalankan file `socket_client.py` di terminal lainnya
+#### 3.3 JALANKAN FILE `socket_client.py` DI TERMINAL LAINNYA
+![jalankan-client](https://github.com/nabielvna/KI-B-231/blob/tugas2/Assets/jalankan-client.png?raw=true)
 **Windows**
 ```
 python socket_client.py
 ```
-#### 4. Mulai melakukan chat dari `client`
+#### 3.4 KIRIM PESAN MELALUI CLIENT
+![kirim-pesan-melalui-client](https://github.com/nabielvna/KI-B-231/blob/tugas2/Assets/kirim-pesan-melalui-client.png?raw=true)
 
-## SUMBER
-[Digital Ocean](https://www.digitalocean.com/community/tutorials/python-socket-programming-server-client)
+#### 3.5 KIRIM PESAN MELALUI SERVER
+![kirim-pesan-melalui-server](https://github.com/nabielvna/KI-B-231/blob/tugas2/Assets/kirim-pesan-melalui-server.png?raw=true)
+
+
+## 4 SUMBER
+#### 4.1 Penggunaan socket dengan python [Digital Ocean](https://www.digitalocean.com/community/tutorials/python-socket-programming-server-client)
